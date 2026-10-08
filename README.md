@@ -72,7 +72,7 @@ Uma plataforma integrada composta por:
 As interfaces foram projetadas seguindo princípios de acessibilidade, contraste adequado para o ambiente de saúde pública e clareza nas ações:
 
 <p align="center">
-  <img src="Protótipo de Alta Fidelidade - UBS/Identidade Visual.png" width="38%" alt="Identidade Visual UBS" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Identidade Visual.png" width="38%" alt="Identidade Visual UBS" />
 </p>
 
 | Amostra | Código Hex | Nome / Função | Descrição e Aplicação |
@@ -93,9 +93,9 @@ Projetado para ser acessado diretamente pelo smartphone do paciente sem necessid
 Interface inicial de autenticação simplificada, permitindo o ingresso com credenciais ou novo registro e redirecionamento direto para o painel de atendimento.
 
 <p align="center">
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela Login Inicio prototipo.png" width="28%" alt="Login" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela Cadastro.png" width="28%" alt="Cadastro" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela Cadastro Concluido.png" width="28%" alt="Cadastro Concluído" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela Login Inicio prototipo.png" width="28%" alt="Login" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela Cadastro.png" width="28%" alt="Cadastro" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela Cadastro Concluido.png" width="28%" alt="Cadastro Concluído" />
 </p>
 
 #### 2. Tela de Fila de Espera
@@ -108,18 +108,18 @@ Interface inicial de autenticação simplificada, permitindo o ingresso com cred
   - **Direita**: Perfil do Usuário.
 
 <p align="center">
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela Fila Aba 1.png" width="28%" alt="Fila Aba 1" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela Fila Aba 2.png" width="28%" alt="Fila Aba 2" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Atualização da fila.png" width="28%" alt="Atualização da Fila" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela Fila Aba 1.png" width="28%" alt="Fila Aba 1" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela Fila Aba 2.png" width="28%" alt="Fila Aba 2" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Atualização da fila.png" width="28%" alt="Atualização da Fila" />
 </p>
 
 #### 3. Fluxo de Cancelamento de Atendimento
 Permite ao paciente liberar sua vaga na fila com aviso prévio de confirmação e feedback imediato de conclusão do cancelamento:
 
 <p align="center">
-  <img src="Protótipo de Alta Fidelidade - UBS/Aviso de Cancelamento.png" width="28%" alt="Aviso de Cancelamento" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Processando Cancelamento.png" width="28%" alt="Processando" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Cancelamento confirmado.png" width="28%" alt="Confirmado" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Aviso de Cancelamento.png" width="28%" alt="Aviso de Cancelamento" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Processando Cancelamento.png" width="28%" alt="Processando" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Cancelamento confirmado.png" width="28%" alt="Confirmado" />
 </p>
 
 #### 4. Unidades de Saúde, Perfil e Histórico
@@ -128,38 +128,62 @@ Permite ao paciente liberar sua vaga na fila com aviso prévio de confirmação 
 - **Histórico de Atendimentos**: consultas anteriores e status de encerramento de cada chamada.
 
 <p align="center">
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela UBS 1.png" width="28%" alt="Unidades UBS" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela Perfil.png" width="28%" alt="Perfil do Paciente" />
-  <img src="Protótipo de Alta Fidelidade - UBS/Tela Histórico de consultas.png" width="28%" alt="Histórico" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela UBS 1.png" width="28%" alt="Unidades UBS" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela Perfil.png" width="28%" alt="Perfil do Paciente" />
+  <img src="Protótipo de Alta Fidelidade - UBS/mobile/Tela Histórico de consultas.png" width="28%" alt="Histórico" />
 </p>
 
 ---
 
 ### 1.4 Módulo Recepção / Triagem (Web Desktop)
 
-Interface otimizada para computadores da recepção da UBS, priorizando velocidade de operação e visão simultânea das filas:
+Interface otimizada para computadores da recepção da UBS, priorizando velocidade de operação e visão simultânea das filas de atendimento:
+
+#### 1. Tela de Login
+Autenticação restrita de atendentes com e-mail e senha corporativa.
 
 <p align="center">
-  <img src="Protótipo de Alta Fidelidade - UBS/Protótipo de Alta Fidelidade - UBS.png" width="90%" alt="Visão Geral Protótipo Recepção UBS" />
+  <img src="Protótipo de Alta Fidelidade - UBS/web/Tela Inicial - Saúde Digital.png" width="85%" alt="Tela de Login Recepção" />
 </p>
 
-1. **Tela de Login**:
-   - Autenticação restrita de atendentes com e-mail e senha.
-2. **Tela de Fila (Acompanhamento por Médico)**:
-   - **Menu Lateral**: atalhos para *Fila*, *Consultas*, *Solicitações de saída* e *Meu perfil*.
-   - **Cabeçalho**: saudação, data atual e identificação da unidade (*UBS CENTRO*).
-   - **Barra de Busca**: pesquisa rápida por médico ou paciente.
-   - **Abas Superiores por Especialidade**: alternância entre profissionais (ex.: Dr. Ricardo Mendes - Clínico Geral, Dra. Luiza Freitas - Dentista).
-   - **Tabela de Atendimento**: Posição (1º, 2º), Nome do Paciente e botão de ação *"Remover paciente"* para gerenciar desistências.
-3. **Tela de Consultas**:
-   - Navegação com breadcrumbs (`> Consultas`).
-   - Botão em destaque *"Cadastrar nova consulta"*.
-   - Filtro de consultas do dia por profissional e listagem com Nome Completo e CPF.
-4. **Tela de Solicitações de Saída**:
-   - Indicador com contador de pendências no menu lateral.
-   - Cartões com paciente, horário da solicitação e botão *"Aceitar Solicitação"*.
-5. **Tela de Meu Perfil**:
-   - Dados cadastrais do atendente (nome, matrícula `ATD-0042`, função e unidade).
+#### 2. Tela de Fila (Acompanhamento por Médico)
+- **Menu Lateral**: navegação principal para alternar entre *Fila*, *Consultas*, *Solicitações de saída*, *Meu perfil*, *Configurações* e *Sair*.
+- **Cabeçalho**: mensagem de saudação (*"Bom dia!"*), data atual (*18/06/2026*) e indicação da unidade (*UBS CENTRO*).
+- **Barra de Busca**: campo *"Buscar fila por médico ou paciente"* para localização ágil.
+- **Visualização da Fila**: navegação por guias superiores organizadas por profissional e especialidade (*Dr. Ricardo Mendes - Clínico Geral*, *Dra. Luiza Freitas - Dentista*, *Dr. Pedro Henrique - Cardiologista*, *Dra. Juliana Silva - Nutricionista*).
+- **Tabela de Atendimento**: listagem com Posição (*1º, 2º, 3º*), Nome do Paciente e ação de controle com botão destacado *"Remover paciente"* para gerenciar desistências.
+
+<p align="center">
+  <img src="Protótipo de Alta Fidelidade - UBS/web/Fila.png" width="85%" alt="Tela de Fila - UBS" />
+</p>
+
+#### 3. Tela de Consultas
+- **Navegação**: mantém o menu lateral e inclui breadcrumb no topo (`> Consultas`).
+- **Ação Principal**: botão em destaque *"Cadastrar nova consulta"* no canto superior direito.
+- **Filtro por Profissional**: abas superiores para alternar a visualização das consultas entre os médicos.
+- **Listagem de Agendamentos**: lista os pacientes agendados para a data selecionada com nome completo e CPF, com aviso de reinício automático de registro de fila após o último paciente atendido.
+
+<p align="center">
+  <img src="Protótipo de Alta Fidelidade - UBS/web/Cadastro de Pacientes - Saúde Digital.png" width="85%" alt="Tela de Consultas / Pacientes" />
+</p>
+
+#### 4. Tela de Solicitações de Saída
+- **Indicador no Menu**: ícone de notificação com contador dinâmico (ex.: indicador `3` solicitações pendentes).
+- **Organização por Médico**: seleção de abas para filtrar as solicitações pelo profissional responsável.
+- **Listagem de Solicitações**: cartões com dados do paciente (Nome e CPF), horário da solicitação e botão de ação *"Aceitar Solicitação"*.
+
+<p align="center">
+  <img src="Protótipo de Alta Fidelidade - UBS/web/Solicitação de saida.png" width="85%" alt="Tela de Solicitações de Saída" />
+</p>
+
+#### 5. Tela de Meu Perfil
+- **Cabeçalho de Perfil**: foto/avatar, nome completo (*Mariana Costa Ferreira*), cargo (*Atendente · Recepção*), perfil de acesso (*atendente*), unidade vinculada (*UBS CENTRO*) e matrícula (*ATD-0042*).
+- **Dados Pessoais e de Contato**: formulário editável para manutenção das informações do usuário.
+- **Vínculo Profissional e Segurança**: bloco informativo com os dados de lotação na unidade e gerenciamento de credenciais de acesso.
+
+<p align="center">
+  <img src="Protótipo de Alta Fidelidade - UBS/web/Perfil do atendente — Saúde Digital.png" width="85%" alt="Tela de Perfil do Atendente" />
+</p>
 
 ---
 
@@ -343,7 +367,7 @@ A aplicação segue o padrão **Cliente-Servidor em Três Camadas**:
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                      CAMADA DE BACK-END                     │
-│               [ Node.js + TypeScript + Express ]             │
+│               [ Node.js + TypeScript + Express ]            │
 │        • JWT Auth       • Engine de Fila e Prioridades      │
 │        • Socket.io      • Cálculo de Estimativa de Espera   │
 └──────────────────────────────┬──────────────────────────────┘
@@ -393,9 +417,10 @@ A aplicação segue o padrão **Cliente-Servidor em Três Camadas**:
 trabalho_ES/
 ├── Documento de Especificação de Requisitos.pdf # Documentação completa (v1.0)
 ├── Protótipo de Alta Fidelidade - UBS/          # Exportações das telas do Figma
+│   ├── mobile/                                  # Módulo Paciente (Mobile First / PWA)
+│   └── web/                                     # Módulo Recepção / Triagem (Web Desktop)
 ├── docs/
-│   └── diagramas/
-│       ├── diagrama_de_classes.png              # Diagrama de Classes
-│       └── diagrama_de_atividades.png           # Diagrama de Atividades
+│   ├── cores/                                   # Amostras das cores da paleta
+│   └── diagramas/                               # Diagramas de Classes e de Atividades
 └── README.md                                    # Documentação principal
 ```
