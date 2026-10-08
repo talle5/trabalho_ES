@@ -32,9 +32,14 @@
      - [2.1 Representação Visual e Mermaid](#21-representação-do-diagrama-de-classes)
      - [2.2 Detalhamento das Classes e Métodos](#22-descrição-das-classes)
      - [2.3 Relacionamentos](#23-relacionamentos-entre-as-classes)
-   - [3. Diagrama de Atividades](#3-diagrama-de-atividades)
-     - [3.1 Fluxo em Raias (Swimlanes)](#31-fluxo-em-raias-swimlanes)
-     - [3.2 Detalhamento Sequencial do Processo](#32-detalhamento-sequencial-do-processo)
+   - [3. Diagramas de Atividades](#3-diagramas-de-atividades)
+     - [3.1 Macrofluxo Integrado do Atendimento](#31-macrofluxo-integrado-do-atendimento)
+     - [3.2 Fluxos Específicos em UML](#32-fluxos-específicos-em-uml)
+       - [Fluxo 1: Cadastro e Adição à Fila](#1-cadastro-e-adição-à-fila)
+       - [Fluxo 2: Visualização da Fila pelo Paciente](#2-visualização-da-fila-pelo-paciente)
+       - [Fluxo 3: Solicitar Cancelamento de Consulta](#3-solicitar-cancelamento-de-consulta-paciente)
+       - [Fluxo 4: Solicitações de Cancelamento](#4-gerenciamento-de-solicitações-de-cancelamento-atendente)
+       - [Fluxo 5: Gerenciamento da Fila e Baixa](#5-gerenciamento-da-fila-e-baixa-atendente)
    - [4. Arquitetura do Sistema e Stack Tecnológica](#4-arquitetura-do-sistema)
      - [4.1 Estilo Arquitetural](#41-visão-geral-e-estilo-arquitetural)
      - [4.2 Módulos do Sistema](#42-módulos-do-sistema)
@@ -199,6 +204,12 @@ Autenticação restrita de atendentes com e-mail e senha corporativa.
 | **Protótipo Mobile (Paciente)** | Aprovou a facilidade de acompanhamento e simplicidade da interface mobile. | Mantido conforme apresentado. |
 | **Validação Geral** | Aprovou a solução global sem necessidade de alterações estruturais nesta etapa. | Protótipo homologado para a fase de desenvolvimento. |
 
+<p align="center">
+  <img src="registro de entrevista.jpeg" width="30%" alt="Registro da Chamada de Validação com a Cliente" />
+  <br />
+  <em>Registro da reunião de apresentação e validação com a técnica de enfermagem Eliane Brito.</em>
+</p>
+
 ---
 
 ## 2. DIAGRAMA DE CLASSES
@@ -316,38 +327,115 @@ classDiagram
 
 ---
 
-## 3. DIAGRAMA DE ATIVIDADES
+## 3. DIAGRAMAS DE ATIVIDADES
 
-O Diagrama de Atividades modela a interação dinâmica entre os três atores principais durante o ciclo de vida do atendimento:
-
-<p align="center">
-  <img src="docs/diagramas/diagrama_de_atividades.png" width="90%" alt="Diagrama de Atividades do Fluxo de Atendimento" />
-</p>
-
-### 3.1 Fluxo em Raias (Swimlanes)
-
-1. **Atendente (Módulo Web)**: ações executadas pela equipe da recepção da UBS.
-2. **Sistema VezCerta (Backend & Tempo Real)**: validações, ordenação de prioridades e emissão de eventos.
-3. **Paciente (Aplicativo PWA / Mobile)**: visualização remota, desistência voluntária e comparecimento.
+A modelagem de atividades do sistema **VezCerta** é composta por um macrofluxo geral de atendimento e por diagramas específicos em UML modelados com o conceito de raias (*swimlanes*), delimitando claramente as responsabilidades entre os atores envolvidos (**Atendente**, **Sistema** e **Paciente**).
 
 ---
 
-### 3.2 Detalhamento Sequencial do Processo
+### 3.1 Macrofluxo Integrado do Atendimento
 
-1. **Recepção e Entrada**:
-   - O atendente busca ou cadastra o paciente e registra sua chegada na UBS.
-2. **Processamento da Fila**:
-   - O sistema valida as informações cadastrais e calcula a prioridade (legal ou de triagem).
-   - O paciente é posicionado na fila e passa a ser monitorado em tempo real.
-3. **Acompanhamento do Paciente**:
-   - O paciente visualiza sua posição pelo smartphone.
-   - Possui autonomia para aguardar ou acionar o cancelamento voluntário caso desista da consulta.
-4. **Chamada do Paciente**:
-   - A recepção ou consultório aciona *"Chamar próximo"*.
-   - O sistema emite notificação instantânea (WebSocket) para o celular do paciente.
-5. **Desfecho do Atendimento**:
-   - **Se o paciente comparece**: o atendimento é registrado e concluído com sucesso.
-   - **Se o paciente não comparece (No-show)**: a ausência é registrada e o paciente é removido da fila.
+Visão ponta a ponta do ciclo de vida do paciente desde a chegada à unidade até o desfecho clínico:
+
+<p align="center">
+  <img src="docs/diagramas/diagrama_de_atividades.png" width="85%" alt="Macrofluxo do Atendimento" />
+</p>
+
+1. **Atendente (Módulo Web)**: busca/cadastra o paciente, registra a chegada e aciona a chamada do próximo paciente.
+2. **Sistema VezCerta (Backend & WebSocket)**: valida informações, posiciona na fila por prioridade, emite notificações em tempo real e processa o comparecimento ou ausência (*no-show*).
+3. **Paciente (Módulo Mobile / PWA)**: acompanha o andamento em tempo real pelo smartphone e possui autonomia para cancelar ou comparecer ao atendimento.
+
+---
+
+### 3.2 Fluxos Específicos em UML
+
+Os fluxos a seguir detalham pontualmente cada operação operacional do sistema:
+
+#### 1. Cadastro e Adição à Fila
+Mapeia a entrada do paciente no fluxo da UBS pela recepção, com checagem de cadastro prévio e classificação de prioridade:
+
+- **Raias**: `Atendente` e `Sistema`
+- **Etapas**:
+  1. O **Atendente** acessa a tela e insere as informações do paciente.
+  2. O **Sistema** verifica se o cadastro já existe:
+     - *Se não existir*: habilita o formulário para preenchimento dos dados básicos.
+     - *Se já existir*: carrega e exibe os dados cadastrais do paciente automaticamente.
+  3. O **Atendente** preenche os dados da consulta e avalia se o paciente é prioridade:
+     - *Não prioritário*: mantido na fila convencional.
+     - *Prioritário*: registrado como prioritário com justificativa do motivo (idade, gestação, etc.).
+  4. O **Atendente** confirma *"Adicionar à fila"*, e o **Sistema** exibe o paciente na lista de espera.
+
+<p align="center">
+  <img src="docs/diagramas/Diagrama de atividades /IMG-20261007-WA0027.jpg" width="75%" alt="Diagrama de Atividades - Cadastro e Adição à Fila" />
+</p>
+
+---
+
+#### 2. Visualização da Fila pelo Paciente
+Descreve o fluxo de consulta remota da posição e estimativa de espera via dispositivo móvel:
+
+- **Raias**: `Paciente` e `Sistema`
+- **Etapas**:
+  1. O **Paciente** acessa o sistema mobile e insere suas credenciais ou token de acesso.
+  2. O **Sistema** valida os dados do paciente.
+  3. O **Sistema** retorna a posição na fila em tempo real juntamente com as informações da consulta agendada.
+  4. O **Paciente** visualiza a sua colocação e acompanha a evolução da fila.
+
+<p align="center">
+  <img src="docs/diagramas/Diagrama de atividades /IMG-20261007-WA0025.jpg" width="75%" alt="Diagrama de Atividades - Visualização da Fila" />
+</p>
+
+---
+
+#### 3. Solicitar Cancelamento de Consulta (Paciente)
+Permite ao paciente liberar sua vaga na fila voluntariamente caso não possa aguardar:
+
+- **Raias**: `Paciente` e `Sistema`
+- **Etapas**:
+  1. O **Paciente** acessa o aplicativo mobile, seleciona a consulta e clica em *"Solicitar cancelamento"*.
+  2. O **Sistema** exibe modal de confirmação.
+  3. O **Paciente** confirma o cancelamento.
+  4. O **Sistema** processa a solicitação e avalia a aprovação:
+     - *Se aprovado*: remove o paciente da fila, atualiza o status para cancelado, recalcula a posição dos pacientes seguintes, registra a aprovação e envia notificação de confirmação.
+     - *Se não aprovado*: mantém o paciente na fila, registra a recusa e notifica o paciente.
+  5. O **Paciente** visualiza o feedback na tela.
+
+<p align="center">
+  <img src="docs/diagramas/Diagrama de atividades /IMG-20261007-WA0028.jpg" width="75%" alt="Diagrama de Atividades - Solicitar Cancelamento de Consulta" />
+</p>
+
+---
+
+#### 4. Gerenciamento de Solicitações de Cancelamento (Atendente)
+Trata a análise e homologação das saídas solicitadas pelos pacientes pela recepção:
+
+- **Raias**: `Atendente` e `Sistema`
+- **Etapas**:
+  1. O **Atendente** acessa a tela de solicitações de cancelamento e checa a existência de pedidos pendentes:
+     - *Sem solicitações*: o **Sistema** exibe o aviso *"Não há solicitações"*.
+     - *Com solicitações*: o **Atendente** seleciona o pedido e decide aceitar ou recusar:
+       - *Recusar*: informa o motivo e o **Sistema** notifica o paciente.
+       - *Aceitar*: confirma a solicitação, o **Sistema** remove o paciente da fila, altera o status do atendimento para cancelado, atualiza a ordenação da fila e emite a notificação ao paciente.
+
+<p align="center">
+  <img src="docs/diagramas/Diagrama de atividades /IMG-20261007-WA0026.jpg" width="75%" alt="Diagrama de Atividades - Solicitações de Cancelamento" />
+</p>
+
+---
+
+#### 5. Gerenciamento da Fila e Baixa (Atendente)
+Controla o avanço dos atendimentos e desfechos de presença ou desistência direta no balcão:
+
+- **Raias**: `Atendente` e `Sistema`
+- **Etapas**:
+  1. O **Atendente** acessa o painel de filas com suas credenciais.
+  2. Diante da chamada, avalia: *Paciente compareceu à consulta?*
+     - *Sim (Compareceu)*: o **Atendente** dá baixa na consulta e o **Sistema** atualiza imediatamente a ordem da fila.
+     - *Não (Ausente / Desistente)*: o **Atendente** clica em *"Remover paciente da fila"*, o **Sistema** solicita confirmação, o **Atendente** confirma e o **Sistema** processa a remoção e reorganiza a fila.
+
+<p align="center">
+  <img src="docs/diagramas/Diagrama de atividades /IMG-20261007-WA0024.jpg" width="75%" alt="Diagrama de Atividades - Gerenciamento de Fila" />
+</p>
 
 ---
 
@@ -415,12 +503,21 @@ A aplicação segue o padrão **Cliente-Servidor em Três Camadas**:
 
 ```bash
 trabalho_ES/
-├── Documento de Especificação de Requisitos.pdf # Documentação completa (v1.0)
+├── Documento de Especificação de Requisitos.pdf # Documentação de Requisitos
 ├── Protótipo de Alta Fidelidade - UBS/          # Exportações das telas do Figma
 │   ├── mobile/                                  # Módulo Paciente (Mobile First / PWA)
 │   └── web/                                     # Módulo Recepção / Triagem (Web Desktop)
 ├── docs/
 │   ├── cores/                                   # Amostras das cores da paleta
-│   └── diagramas/                               # Diagramas de Classes e de Atividades
+│   └── diagramas/                               # Modelagem visual do sistema
+│       ├── diagrama_de_classes.png              # Diagrama de Classes UML
+│       ├── diagrama_de_atividades.png           # Macrofluxo Geral de Atividades
+│       └── Diagrama de atividades /             # Diagramas de Atividades por fluxo (UML)
+│           ├── IMG-20261007-WA0024.jpg          # Gerenciamento de Fila
+│           ├── IMG-20261007-WA0025.jpg          # Visualização da Fila
+│           ├── IMG-20261007-WA0026.jpg          # Solicitações de Cancelamento
+│           ├── IMG-20261007-WA0027.jpg          # Cadastro e Adição à Fila
+│           └── IMG-20261007-WA0028.jpg          # Solicitar Cancelamento de Consulta
+├── registro de entrevista.jpeg                  # Evidência da validação com o cliente
 └── README.md                                    # Documentação principal
 ```
